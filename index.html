@@ -3,6 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#06080c">
+<meta name="description" content="Vigor: entrenamiento, carrera, alimentación, sueño y progreso.">
+<link rel="manifest" href="./manifest.json">
+<link rel="icon" href="./icons/icon-192.png" sizes="192x192">
+<link rel="apple-touch-icon" href="./icons/icon-192.png">
 <title>Vigor</title>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;800&display=swap" rel="stylesheet">
 <style>
@@ -233,5 +238,16 @@ function stopRun(ok){if(run.id!=null)navigator.geolocation.clearWatch(run.id);if
 setInterval(function(){if(tab=="gym"&&sess&&$("gt"))$("gt").textContent=fmt((Date.now()-sess.t0)/1000);if(tab=="run"&&run&&$("rt")){var s=(Date.now()-run.t0)/1000;$("rt").textContent=fmt(s);$("rk").textContent=run.km.toFixed(2);$("rp").textContent=pace(run.km,s);$("rs").textContent=run.msg}},1000);
 render();
 </script>
+
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", function () {
+    navigator.serviceWorker.register("./sw.js").catch(function (err) {
+      console.warn("No se pudo registrar el modo offline de Vigor:", err);
+    });
+  });
+}
+</script>
+
 </body>
 </html>
